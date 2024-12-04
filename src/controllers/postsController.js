@@ -2,6 +2,7 @@ const { getAllPosts, getPostById, createPost, updatePost, deletePost } = require
 const uuid = require('uuid');
 const fs = require('fs');
 
+
 async function getPosts(req, res, next) {
     try {
         const { page, limit, sortBy, sortOrder } = req.query;
@@ -49,6 +50,9 @@ async function updateExistingPost(req, res, next) {
             throw new Error(`Post with id ${id} not found`);
         }
         const updatedPost = await updatePost(id, title, content, image);
+        if (updatedPost.image && updatedPost.image !== "") {
+            fs.unlinkSync(updatedPost.image);
+        }
         res.json({ data: updatedPost });
     } catch (error) {
         next(error);
