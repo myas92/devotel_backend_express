@@ -1,7 +1,6 @@
 const { PrismaClient } = require('@prisma/client');
 const admin = require('../src/config/firebase');
 const adminUsers = require('../secrets/admins.json');
-const prismaClient = new PrismaClient();
 
 const seedAdmins = async () => {
     for (const adminUser of adminUsers) {
@@ -21,14 +20,6 @@ const seedAdmins = async () => {
                     await admin.auth().setCustomUserClaims(userRecord.uid, { role: adminUser.role });
 
                     console.log(`Role ${adminUser.role} assigned to user ${adminUser.email}`);
-
-                    await prismaClient.user.create({
-                        data: {
-                            email: adminUser.email,
-                            role: adminUser.role,
-                        },
-                    });
-
                 } catch (error) {
                     console.error('Error creating user:', error);
                 }

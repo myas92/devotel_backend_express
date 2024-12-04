@@ -16,17 +16,3 @@ model posts {
   updatedAt DateTime @updatedAt
 }
 
-
-model user {
-  id       String   @id @unique @default(uuid()) @db.Uuid
-  email    String   @unique
-  password String
-  roleId   String   @db.Uuid
-  role     role     @relation(fields: [roleId], references: [id])
-}
-
-model role {
-  id    String   @id @unique @default(uuid()) @db.Uuid
-  name  String   @unique
-  users user[]   // One-to-many relation: a role can have many users
-}
