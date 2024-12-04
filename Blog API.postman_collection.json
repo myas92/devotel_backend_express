@@ -1,0 +1,792 @@
+{
+	"info": {
+		"_postman_id": "b9510b6f-9ba5-4317-b7f2-cabebe8b002f",
+		"name": "Blog API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35112842"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"postman.setEnvironmentVariable(\"FIREBASE_AUTH_TOKEN\", jsonData.idToken);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"m.y.ahmadi222@gmail.com\",\n    \"password\": \"123123123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\":\"m.y.ahmadi222@gmail.com\",\n    \"password\": \"123123123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/auth/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1209"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4b9-av7gTVfmex707v3mOaMSg4F2d8g\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 04 Dec 2024 19:27:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"idToken\": \"\",\n    \"refreshToken\": \"\",\n    \"expiresIn\": \"3600\"\n}"
+						}
+					]
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"m.y.ahmadi2222@gmail.com\",\n    \"password\": \"123123123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Posts",
+			"item": [
+				{
+					"name": "Get All Posts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{FIREBASE_AUTH_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url}}/posts?page=1&limit=10",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"posts"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "orderBy",
+									"value": "desc",
+									"disabled": true
+								},
+								{
+									"key": "orderType",
+									"value": "updatedAt",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All Posts",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{url}}/posts?page=1&limit=5",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"posts"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "5"
+										},
+										{
+											"key": "orderBy",
+											"value": "desc",
+											"disabled": true
+										},
+										{
+											"key": "orderType",
+											"value": "updatedAt",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1233"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4d1-b2ARzuoCLpJgZqU0hRkH4/6rwNs\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 04 Dec 2024 20:24:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"total\": 9,\n        \"page\": 1,\n        \"limit\": 5,\n        \"totalPages\": 2\n    },\n    \"data\": [\n        {\n            \"id\": \"a440b8ed-72d2-43a8-9aab-b93b9cfc341d\",\n            \"title\": \"Sample Title\",\n            \"content\": \"Sample Content\",\n            \"image\": \"uploads/ba6b56dd-ed08-4052-b408-f4d384f48804.jpeg\",\n            \"createdAt\": \"2024-12-04T20:23:29.228Z\",\n            \"updatedAt\": \"2024-12-04T20:23:29.228Z\"\n        },\n        {\n            \"id\": \"416b7a42-cecc-47b3-be74-f3fc40948e62\",\n            \"title\": \"Sample Title\",\n            \"content\": \"Sample Content\",\n            \"image\": \"uploads/fa33b3bb-a367-4909-91a6-07e4e959a6f4.jpeg\",\n            \"createdAt\": \"2024-12-04T20:23:28.615Z\",\n            \"updatedAt\": \"2024-12-04T20:23:28.615Z\"\n        },\n        {\n            \"id\": \"f8c52457-a82d-4d08-a1ba-c7edf003c09d\",\n            \"title\": \"Sample Title\",\n            \"content\": \"Sample Content\",\n            \"image\": \"uploads/f5f57950-c7d6-4796-8a2a-33e996205a7c.jpeg\",\n            \"createdAt\": \"2024-12-04T20:23:28.105Z\",\n            \"updatedAt\": \"2024-12-04T20:23:28.105Z\"\n        },\n        {\n            \"id\": \"23c085a6-e12a-4cdc-9d08-325c15f31ff2\",\n            \"title\": \"Sample Title\",\n            \"content\": \"Sample Content\",\n            \"image\": \"uploads/718b8a93-d5ac-4b4c-aee8-9ac9cb902ddf.jpeg\",\n            \"createdAt\": \"2024-12-04T20:23:27.577Z\",\n            \"updatedAt\": \"2024-12-04T20:23:27.577Z\"\n        },\n        {\n            \"id\": \"c9c598e0-660d-417e-bd82-20ec56727533\",\n            \"title\": \"Sample Title\",\n            \"content\": \"Sample Content\",\n            \"image\": \"uploads/f5645cf2-5cf1-44d6-b665-2d9d80837551.jpeg\",\n            \"createdAt\": \"2024-12-04T20:23:26.974Z\",\n            \"updatedAt\": \"2024-12-04T20:23:26.974Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Post By ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{FIREBASE_AUTH_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/posts/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"posts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{post_id}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Post By ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{FIREBASE_AUTH_TOKEN}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/posts/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"posts",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{post_id}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "242"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"f2-B4tXw2fBuwhe7wbwZZRjRMv++A4\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 04 Dec 2024 20:24:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": \"1003660e-5bf5-4c03-a007-478411b59306\",\n        \"title\": \"Sample Title\",\n        \"content\": \"Sample Content\",\n        \"image\": \"uploads/cc55e151-3f41-4af8-9baf-3cd02cf8ff45.jpeg\",\n        \"createdAt\": \"2024-12-04T20:24:51.358Z\",\n        \"updatedAt\": \"2024-12-04T20:24:51.358Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Post",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"postman.setEnvironmentVariable(\"post_id\", jsonData.data.id);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{FIREBASE_AUTH_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Sample Title",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "Sample Content",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/home/yaser/Pictures/download.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/posts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Post",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Sample Title",
+											"type": "text"
+										},
+										{
+											"key": "content",
+											"value": "Sample Content",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/home/yaser/Pictures/download.jpeg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/posts",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"posts"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "242"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"f2-kwdO4OeZJggndJ77fvNKWBWeJvM\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 04 Dec 2024 20:30:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": \"f2d13849-e2ea-47ea-ab39-7cb57950747d\",\n        \"title\": \"Sample Title\",\n        \"content\": \"Sample Content\",\n        \"image\": \"uploads/5b18791d-2f75-4e72-b0f9-57781726f3c9.jpeg\",\n        \"createdAt\": \"2024-12-04T20:30:32.874Z\",\n        \"updatedAt\": \"2024-12-04T20:30:32.874Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Post",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{FIREBASE_AUTH_TOKEN}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Updated Title",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "Updated Content",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/home/yaser/Pictures/Screenshots/Screenshot from 2024-11-12 15-16-27.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/posts/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"posts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{post_id}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Post",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{FIREBASE_AUTH_TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Updated Title",
+											"type": "text"
+										},
+										{
+											"key": "content",
+											"value": "Updated Content",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/home/yaser/Pictures/Screenshots/Screenshot from 2024-11-12 15-16-27.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/posts/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"posts",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{post_id}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "243"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"f3-yY48wYGxKxlCzsOCUQbKI9zNg20\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 04 Dec 2024 20:30:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": \"a48e89b0-5a78-47ae-a166-453d25ab9562\",\n        \"title\": \"Updated Title\",\n        \"content\": \"Updated Content\",\n        \"image\": \"uploads/7036ee58-d594-4fd6-bb53-59e6d7e84caa.png\",\n        \"createdAt\": \"2024-12-04T20:30:18.994Z\",\n        \"updatedAt\": \"2024-12-04T20:30:22.856Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Post",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{FIREBASE_AUTH_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/posts/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"posts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{post_id}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete Post",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{FIREBASE_AUTH_TOKEN}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/posts/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"posts",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{post_id}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "39"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"27-ApdGuEKF5DvnjukxrpHUpaQnnd8\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 04 Dec 2024 20:25:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Post deleted successfully\"\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "FIREBASE_AUTH_TOKEN",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
