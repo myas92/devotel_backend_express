@@ -2,7 +2,7 @@ const axios = require("axios");
 const admin = require('../config/firebase');
 const FIREBASE_API_KEY = process.env.FIREBASE_API_KEY;
 async function login(req, res) {
-    
+
     const { email, password } = req.body;
 
     if (!email || !password) {
@@ -17,7 +17,7 @@ async function login(req, res) {
                 password,
                 returnSecureToken: true,
             },
-            {headers: {'User-Agent': 'whatever'}}
+            { headers: { 'User-Agent': 'whatever' } }
         );
 
 
@@ -34,31 +34,36 @@ async function login(req, res) {
 
 
 async function register(req, res) {
-    
     const { email, password } = req.body;
+    const role = 'user'
 
     if (!email || !password) {
-        return res.status(400).json({ error: 'Email and password are required' });
+        return res.status(400).json({ error: 'Email, password are required' });
     }
 
     try {
-        const userRecord = await admin.auth().createUser({
-            email: adminUser.email,
-            password: adminUser.password,
-        });
-        await admin.auth().setCustomUserClaims(userRecord.uid, { role: adminUser.role });
-
-        res.json({
-            idToken: response.data.idToken,
-            refreshToken: response.data.refreshToken,
-            expiresIn: response.data.expiresIn,
-        });
+        const existingUser = await admin.auth().getUserByEmail(email);
+        if (existingUser) {
+            console.log(`User already exists: ${email}`);
+            return res.status(400).json({ error: 'User already exists' });
+        }
     } catch (error) {
-        const errorMessage = error.response?.data?.error?.message || 'Authentication failed';
-        res.status(401).json({ error: errorMessage });
+        if (error.code !== 'auth/user-not-found') {
+            console.error('Error checking user:', error);
+            return res.status(500).json({ message: 'Error checking user' });
+        }
+    }
+    try {
+        const userRecord = await admin.auth().createUser({
+            email,
+            password: password,
+        });
+        await admin.auth().setCustomUserClaims(userRecord.uid, { role: role });
+        return res.status(201).json({ data: { email, role } });
+    } catch (error) {
+        console.error('Error creating user:', error);
+        return res.status(500).json({ error: 'Error creating user' });
     }
 }
 
-
-
-module.exports = { login , register};
+module.exports = { login, register };
