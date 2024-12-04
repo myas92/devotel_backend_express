@@ -44,6 +44,10 @@ async function updateExistingPost(req, res, next) {
         const { id } = req.params;
         const { title, content } = req.body;
         const image = req.file ? req.file.path : null;
+        const postExists = await getPostById(id);
+        if (!postExists) {
+            throw new Error(`Post with id ${id} not found`);
+        }
         const updatedPost = await updatePost(id, title, content, image);
         res.json({ data: updatedPost });
     } catch (error) {
