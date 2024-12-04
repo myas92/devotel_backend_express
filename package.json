@@ -1,6 +1,6 @@
 {
   "name": "blog-api",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A secure RESTful API for a blog application, featuring Firebase Authentication, role-based access control, and CRUD operations using Node.js, Express, and PostgreSQL.",
   "main": "src/server.js",
   "scripts": {

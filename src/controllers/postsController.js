@@ -4,8 +4,9 @@ const fs = require('fs');
 
 async function getPosts(req, res, next) {
     try {
-        const result = await getAllPosts();
-        res.json({ data: result });
+        const { page, limit, sortBy, sortOrder } = req.query;
+        const result = await getAllPosts({ page, limit, sortBy, sortOrder });
+        res.json(result);
     } catch (error) {
         next(error);
     }
