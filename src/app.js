@@ -14,6 +14,7 @@ app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
 app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 app.use(bodyParser.json({ limit: '10mb' }));
+
 app.use('/posts', postRoutes);
 app.use('/auth', authRoutes);
 app.use((req, res, next) => {
