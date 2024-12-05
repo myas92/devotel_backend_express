@@ -77,3 +77,32 @@ npm start
 ```
 
 The app will be running at http://localhost:3000.
+
+
+
+
+
+### 3. **Architecture Decisions**
+Add a section in the `README.md` or a separate file (e.g., `ARCHITECTURE.md`) to explain your architecture. Here’s an example outline:
+
+
+## Architecture Decisions
+
+### MVC Pattern
+- **Controller**: Handles HTTP requests, processes input, and delegates tasks to the appropriate model methods for database queries.
+- **Model**:  Directly interacts with the database using Prisma. It contains all query logic, ensuring a clean separation of concerns between data access and business logic.
+- **Repository**:  Not used in this implementation since the Prisma ORM allows query logic to be written cleanly within the model layer.
+
+
+### Technologies
+- **Express.js**: Lightweight framework for handling HTTP requests and routing.
+- **Prisma**: ORM for interacting with the PostgreSQL database.
+- **Firebase**: Used for authentication and/or other services.
+
+### Key Design Choices
+- **Modular Structure**: Divided the code into controllers, models maintainability.
+- **Centralized Error Handling**: Used middleware for error management.
+- **Environment Configuration**: Used `dotenv` for environment variables.
+- **Scalability**: Designed the project with a focus on scalability, keeping modules loosely coupled.
+- **Dockerized Deployment**: The application is containerized using Docker, ensuring consistent runtime environments across development and production.
+- **Docker Compose**: Used to orchestrate multiple services, such as the Node.js server, PostgreSQL database
